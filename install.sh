@@ -103,6 +103,10 @@ fi
 if [[ "$DO_RUN" == "true" ]] && [[ -d "$VENV" ]]; then
   echo ""
   echo "Starting Janet API server in background..."
+  # #region agent log
+  _LOG="/Users/mzxzd/Documents/.cursor/debug-af520e.log"
+  echo '{"sessionId":"af520e","hypothesisId":"H1","location":"install.sh:--run","message":"env before server start","data":{"JANET_DEFAULT_MODEL":"'"${JANET_DEFAULT_MODEL:-<unset>}"'"},"timestamp":'$(date +%s)000'}' >> "$_LOG" 2>/dev/null || true
+  # #endregion
   "$VENV/bin/python" "$JANET_SEED_DIR/janet_api_server.py" &
   PID=$!
   sleep 3
